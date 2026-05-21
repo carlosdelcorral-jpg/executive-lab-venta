@@ -2206,12 +2206,17 @@ Aceptar todo
         const c = s.cloneNode(true); c.setAttribute('aria-hidden','true'); c.classList.add('vid-clone'); track.appendChild(c);
       });
     }
-    // Mover las flechas FUERA del .vid-controls para anclarlas al carousel
+    // Mover las flechas FUERA del .vid-carousel (que tiene gradients vintage)
+    // Las pegamos al .container padre para que floten POR ENCIMA del fade
     const controls = carousel.querySelector('.vid-controls');
     const prev = controls && controls.querySelector('.vid-prev');
     const next = controls && controls.querySelector('.vid-next');
-    if (prev) carousel.appendChild(prev);
-    if (next) carousel.appendChild(next);
+    const carouselParent = carousel.parentNode;
+    if (carouselParent) {
+      carouselParent.style.position = 'relative';
+      if (prev) { prev.classList.add('vid-prev-outer'); carouselParent.appendChild(prev); }
+      if (next) { next.classList.add('vid-next-outer'); carouselParent.appendChild(next); }
+    }
     if (controls) controls.remove();
     // Carousel estatico · solo se mueve con flechas (NO auto-scroll)
     let currentOffset = 0;

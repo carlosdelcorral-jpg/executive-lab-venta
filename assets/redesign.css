@@ -13440,3 +13440,145 @@ html body .el-vidmodal.is-paused .el-vidmodal-playicon {
 }
 
 /* END · PATCH 47 modal sin fullscreen + click-to-play + play icon overlay */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PATCH 48 · FLECHAS FUERA del carousel · NUNCA tapadas por vintage fade
+   Las flechas ahora viven en el .container (padre del carousel)
+   con position absolute. Como NO están dentro del .vid-carousel
+   (que tiene los gradients ::before/::after), nada las puede oscurecer.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Reglas viejas para flechas DENTRO del carousel · neutralizadas */
+html body section.section-paper#resultados .vid-carousel .vid-btn,
+html body section.section-paper#resultados .vid-carousel .vid-prev,
+html body section.section-paper#resultados .vid-carousel .vid-next {
+  /* Si todavía estuvieran dentro del carousel, también funcionarían */
+  z-index: 200 !important;
+}
+
+/* Flechas en su nueva ubicación · directamente bajo el .container */
+html body section.section-paper#resultados .container > .vid-prev-outer,
+html body section.section-paper#resultados .container > .vid-next-outer,
+html body section.section-paper#resultados .container .vid-prev-outer,
+html body section.section-paper#resultados .container .vid-next-outer,
+html body section.section-paper#resultados .vid-prev-outer,
+html body section.section-paper#resultados .vid-next-outer {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 64px !important;
+  height: 64px !important;
+  border-radius: 50% !important;
+  background: #EC4429 !important;
+  background-color: #EC4429 !important;
+  border: 3px solid #ffffff !important;
+  color: #ffffff !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  z-index: 500 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  pointer-events: auto !important;
+  box-shadow:
+    0 16px 40px -8px rgba(0,0,0,0.7),
+    0 0 0 1px rgba(255,255,255,0.35) inset,
+    0 0 50px -6px rgba(236,68,41,0.8),
+    0 0 0 6px rgba(0,0,0,0.4) !important;
+  transition: background-color .25s ease, transform .25s ease, box-shadow .25s ease !important;
+  font-family: inherit !important;
+  font-size: 0 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+html body section.section-paper#resultados .vid-prev-outer {
+  left: clamp(16px, 3vw, 40px) !important;
+  right: auto !important;
+}
+html body section.section-paper#resultados .vid-next-outer {
+  right: clamp(16px, 3vw, 40px) !important;
+  left: auto !important;
+}
+
+html body section.section-paper#resultados .vid-prev-outer svg,
+html body section.section-paper#resultados .vid-next-outer svg {
+  width: 26px !important;
+  height: 26px !important;
+  stroke: #ffffff !important;
+  stroke-width: 2.8 !important;
+  fill: none !important;
+  display: block !important;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6)) !important;
+}
+
+/* Hover · más grande + glow más fuerte */
+html body section.section-paper#resultados .vid-prev-outer:hover,
+html body section.section-paper#resultados .vid-next-outer:hover {
+  background-color: #c93521 !important;
+  box-shadow:
+    0 20px 48px -8px rgba(0,0,0,0.75),
+    0 0 0 1px rgba(255,255,255,0.45) inset,
+    0 0 70px -6px rgba(236,68,41,1),
+    0 0 0 6px rgba(0,0,0,0.5) !important;
+}
+html body section.section-paper#resultados .vid-prev-outer:hover {
+  transform: translateY(-50%) scale(1.08) !important;
+}
+html body section.section-paper#resultados .vid-next-outer:hover {
+  transform: translateY(-50%) scale(1.08) !important;
+}
+
+html body section.section-paper#resultados .vid-prev-outer:active,
+html body section.section-paper#resultados .vid-next-outer:active {
+  background-color: #b02e1a !important;
+}
+
+/* Asegurar que el .container del marquee es relative */
+html body section.section-paper#resultados .container {
+  position: relative !important;
+}
+
+/* Cancelar pseudo-elements ::before/::after de las flechas viejas */
+html body section.section-paper#resultados .vid-prev-outer::before,
+html body section.section-paper#resultados .vid-prev-outer::after,
+html body section.section-paper#resultados .vid-next-outer::before,
+html body section.section-paper#resultados .vid-next-outer::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* MOBILE · flechas más pequeñas pero igual de visibles */
+@media (max-width: 720px) {
+  html body section.section-paper#resultados .vid-prev-outer,
+  html body section.section-paper#resultados .vid-next-outer {
+    width: 48px !important;
+    height: 48px !important;
+    border-width: 2px !important;
+    box-shadow:
+      0 12px 28px -6px rgba(0,0,0,0.7),
+      0 0 0 1px rgba(255,255,255,0.35) inset,
+      0 0 36px -4px rgba(236,68,41,0.8),
+      0 0 0 4px rgba(0,0,0,0.4) !important;
+  }
+  html body section.section-paper#resultados .vid-prev-outer {
+    left: 12px !important;
+  }
+  html body section.section-paper#resultados .vid-next-outer {
+    right: 12px !important;
+  }
+  html body section.section-paper#resultados .vid-prev-outer svg,
+  html body section.section-paper#resultados .vid-next-outer svg {
+    width: 20px !important;
+    height: 20px !important;
+    stroke-width: 3 !important;
+  }
+}
+
+/* END · PATCH 48 flechas FUERA del carousel · imposibles de tapar */
