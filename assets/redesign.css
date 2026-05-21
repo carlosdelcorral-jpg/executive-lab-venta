@@ -13077,3 +13077,60 @@ html body section.section-paper#resultados .vid-carousel {
 }
 
 /* END · PATCH 44 flechas testimonios visibles + sin auto-scroll */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PATCH 45 · Flechas POR ENCIMA del fade vintage + videos clickeables
+   1) Flechas z-index 100 (por encima de gradients laterales)
+   2) Gradients vintage con pointer-events: none (no bloquean clicks)
+   3) Video tag con pointer-events: auto y z-index correcto
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Gradients laterales del marquee · NUNCA bloquean clicks */
+html body section.section-paper#resultados .vid-carousel::before,
+html body section.section-paper#resultados .vid-carousel::after {
+  pointer-events: none !important;
+  z-index: 4 !important;
+}
+
+/* Flechas · MUY por encima de TODO */
+html body section.section-paper#resultados .vid-carousel .vid-btn,
+html body section.section-paper#resultados .vid-carousel .vid-prev,
+html body section.section-paper#resultados .vid-carousel .vid-next {
+  z-index: 100 !important;
+  pointer-events: auto !important;
+  position: absolute !important;
+}
+
+/* Video · clickeable y sin elementos encima */
+html body section.section-paper#resultados .vid-video {
+  pointer-events: auto !important;
+  z-index: 2 !important;
+  position: relative !important;
+}
+html body section.section-paper#resultados .vid-video video {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  z-index: 3 !important;
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Asegurar que los placeholders ocultos no bloquean clicks */
+html body section.section-paper#resultados .vid-placeholder,
+html body section.section-paper#resultados .vid-c,
+html body section.section-paper#resultados .vid-c-tl,
+html body section.section-paper#resultados .vid-c-tr,
+html body section.section-paper#resultados .vid-c-bl,
+html body section.section-paper#resultados .vid-c-br {
+  pointer-events: none !important;
+}
+
+/* Slides · permiten clicks en sus hijos */
+html body section.section-paper#resultados .vid-slide,
+html body section.section-paper#resultados .vid-carousel .vid-slide {
+  pointer-events: auto !important;
+}
+
+/* END · PATCH 45 flechas encima fade + videos clickeables */
