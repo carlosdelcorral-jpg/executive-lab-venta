@@ -2232,4 +2232,27 @@ Aceptar todo
   }, 50);
 })();
 </script>
+<!-- ════ UTM forwarding al calendar de booking ════
+     Cuando alguien llega con ?utm_source=meta&utm_campaign=...
+     los UTMs viajan automáticamente al hacer click en cualquier
+     link a calendar.executivelab.ai (admisión / booking).
+     Crítico para atribución de campañas Meta Ads. -->
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    const currentParams = window.location.search;
+    if (!currentParams) return;
+
+    document.querySelectorAll('a[href*="calendar.executivelab.ai"]').forEach(function(link) {
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      let cleanHref = href.split('?')[0].split('#')[0];
+      const existingHash = href.includes('#') ? '#' + href.split('#')[1] : '';
+
+      link.setAttribute('href', cleanHref + currentParams + existingHash);
+    });
+  });
+})();
+</script>
 </body> </html>
