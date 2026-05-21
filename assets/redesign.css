@@ -14054,3 +14054,84 @@ html body section.section-paper#resultados .vid-tag {
 }
 
 /* END · PATCH 56 nuclear naranjas + flechas off + testimonio tag off */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PATCH 57 · KILL FLECHAS ::after definitivamente · titulos dolor en negro
+   + flechas testimonios más translucidas
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ─── PSEUDO ARROWS (círculos translúcidos con →) · OUT ─── */
+html body a.hv2-cta::after,
+html body .hv2-cta::after,
+html body .btn-primary::after,
+html body a.nav-cta::after,
+html body .nav-cta::after,
+html body a.ov3-cta::after,
+html body .ov3-cta::after,
+html body a.cv2-cta::after,
+html body a.cv2-cta-primary::after,
+html body a.cv2-cta-secondary::after,
+html body a.el-cta-mobile::after,
+html body section.offer-v3 .ov3-cta::after,
+html body section.closing-v2 .cv2-cta::after,
+html body section.closing-v2 .cv2-cta-primary::after,
+html body section.closing-v2 .cv2-cta-secondary::after,
+html body div[style*="FBF8F3"] a::after,
+html body div[style*="F2EBE0"] a::after {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* hover/active del ::after también */
+html body .hv2-cta:hover::after,
+html body .hv2-cta:active::after,
+html body .ov3-cta:hover::after,
+html body .ov3-cta:active::after,
+html body .cv2-cta:hover::after,
+html body .cv2-cta:active::after {
+  content: none !important;
+  display: none !important;
+  transform: none !important;
+}
+
+/* ─── DOLOR-V2 · TODOS los títulos h3 en NEGRO ─── */
+html body section.dolor-v2 .dv2-card h3,
+html body section.dolor-v2 article.dv2-card h3 {
+  color: #0a0a0a !important;
+  -webkit-text-fill-color: #0a0a0a !important;
+}
+/* El asterisco ::before del título queda en naranja */
+html body section.dolor-v2 .dv2-card h3::before {
+  color: #EC4429 !important;
+  -webkit-text-fill-color: #EC4429 !important;
+}
+
+/* ─── TESTIMONIOS · flechas laterales más TRANSLÚCIDAS ─── */
+html body section.section-paper#resultados .vid-prev-outer,
+html body section.section-paper#resultados .vid-next-outer {
+  background: rgba(236, 68, 41, 0.72) !important;
+  background-color: rgba(236, 68, 41, 0.72) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.6) !important;
+  box-shadow:
+    0 12px 32px -8px rgba(0,0,0,0.45),
+    0 0 0 1px rgba(255,255,255,0.18) inset,
+    0 0 36px -10px rgba(236,68,41,0.5) !important;
+}
+html body section.section-paper#resultados .vid-prev-outer:hover,
+html body section.section-paper#resultados .vid-next-outer:hover {
+  background: rgba(236, 68, 41, 0.95) !important;
+  background-color: rgba(236, 68, 41, 0.95) !important;
+  border-color: #ffffff !important;
+}
+
+/* END · PATCH 57 flechas pseudo OUT + dolor negro + flechas translucid */
