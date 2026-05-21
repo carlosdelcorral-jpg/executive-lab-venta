@@ -13582,3 +13582,51 @@ html body section.section-paper#resultados .vid-next-outer::after {
 }
 
 /* END · PATCH 48 flechas FUERA del carousel · imposibles de tapar */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PATCH 49 · Unificar naranjas en "El mayor riesgo" (dolor-v2)
+   Todos los acentos naranja de los 3 bloques usan el mismo color:
+   #EC4429 (Executive · primary)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* H3 títulos de las 3 cards · mismo naranja Executive */
+html body section.dolor-v2 .dv2-card h3 {
+  color: #EC4429 !important;
+}
+/* El asterisco ::before del título · mismo naranja */
+html body section.dolor-v2 .dv2-card h3::before {
+  color: #EC4429 !important;
+  opacity: 0.85 !important;
+}
+/* Strong dentro de los párrafos · negro intenso (no naranja, para legibilidad) */
+html body section.dolor-v2 .dv2-card p strong,
+html body section.dolor-v2 .dv2-card p b {
+  color: #0a0a0a !important;
+  font-weight: 700 !important;
+}
+/* Em dentro de párrafos · naranja Executive */
+html body section.dolor-v2 .dv2-card p em,
+html body section.dolor-v2 .dv2-card p i {
+  color: #EC4429 !important;
+  font-style: italic !important;
+}
+/* Icono SVG (oculto pero por si reaparece) · naranja */
+html body section.dolor-v2 .dv2-card .dv2-icon {
+  color: rgba(236,68,41,0.6) !important;
+}
+/* Punto rojo esquina inferior derecha (decorativo) · naranja */
+html body section.dolor-v2 .dv2-card::after {
+  background: #EC4429 !important;
+}
+/* Borde superior decorativo · gradient con naranja Executive */
+html body section.dolor-v2 .dv2-card::before {
+  background: linear-gradient(90deg, transparent 0%, #EC4429 50%, transparent 100%) !important;
+}
+/* H2 cabecera · em en naranja Executive */
+html body section.dolor-v2 .dv2-head h2 em,
+html body section.dolor-v2 h2 em {
+  color: #EC4429 !important;
+}
+
+/* END · PATCH 49 naranjas unificados en dolor-v2 */
