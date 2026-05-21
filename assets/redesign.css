@@ -12908,3 +12908,30 @@ html body a.el-cta-mobile:focus-visible {
 }
 
 /* END · PATCH 41 navegación móvil responsive + WA icon SVG robusto */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PATCH 42 · FIX duplicación icono WhatsApp en desktop
+   El ::before antiguo del PATCH inicial seguía añadiendo otro icono.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+html body a.el-wa-floating::before,
+html body .el-wa-floating::before,
+html body a.el-wa-floating::after,
+html body .el-wa-floating::after {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  visibility: hidden !important;
+}
+
+/* END · PATCH 42 fix WA icon duplicado desktop */
