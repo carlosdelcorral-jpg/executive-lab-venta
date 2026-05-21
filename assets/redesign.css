@@ -14135,3 +14135,32 @@ html body section.section-paper#resultados .vid-next-outer:hover {
 }
 
 /* END · PATCH 57 flechas pseudo OUT + dolor negro + flechas translucid */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PATCH 58 · Centrar texto en botones (sin flecha ya)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Todos los CTAs de Solicitar/Acceso · texto centrado, sin gap reservado */
+html body a.hv2-cta,
+html body section.offer-v3 .ov3-cta,
+html body section.closing-v2 .cv2-cta,
+html body section.closing-v2 .cv2-cta-primary,
+html body section.closing-v2 .cv2-cta-secondary,
+html body a.el-cta-mobile,
+html body a.nav-cta,
+html body .nav-cta,
+html body div[style*="FBF8F3"] a,
+html body div[style*="F2EBE0"] a {
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 0 !important;
+}
+
+/* Microctas del offer · mantener su gap interno */
+html body section.offer-v3 .ov3-microctas a {
+  justify-content: center !important;
+  gap: 0 !important;
+}
+
+/* END · PATCH 58 botones centrados sin flecha */
