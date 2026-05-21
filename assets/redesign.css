@@ -13689,3 +13689,85 @@ html body section.faq-v2 .fv2-ans ul li::before { color: #EC4429 !important; }
 html body section.closing-v2 h2 em { color: #EC4429 !important; }
 
 /* END · PATCH 50 naranjas unificados global */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PATCH 51 · Alineación dolor-v2 + h2 expandido + offer/mentors fixes
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ─── DOLOR-V2 · cards alineadas (misma altura, titulos al tope) ─── */
+html body section.dolor-v2 .dv2-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: clamp(20px, 2.2vw, 32px) !important;
+  align-items: stretch !important;
+  grid-auto-rows: 1fr !important;
+}
+html body section.dolor-v2 .dv2-card {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  padding: clamp(40px, 4vw, 56px) clamp(32px, 3.2vw, 42px) clamp(48px, 5vw, 64px) !important;
+}
+html body section.dolor-v2 .dv2-card h3 {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  margin-bottom: 24px !important;
+  flex: 0 0 auto !important;
+  min-height: 0 !important;
+}
+html body section.dolor-v2 .dv2-card p {
+  flex: 1 1 auto !important;
+}
+
+/* ─── DOLOR-V2 · H2 expandido (más ancho) ─── */
+html body section.dolor-v2 .dv2-head {
+  max-width: 1240px !important;
+  margin: 0 auto clamp(64px, 7vw, 96px) !important;
+}
+html body section.dolor-v2 .dv2-head h2,
+html body section.dolor-v2 h2 {
+  font-size: clamp(36px, 5vw, 64px) !important;
+  line-height: 1.04 !important;
+  letter-spacing: -0.028em !important;
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-wrap: balance !important;
+}
+
+@media (max-width: 880px) {
+  html body section.dolor-v2 .dv2-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+}
+
+/* ─── OFFER · botón "Compra directa" → "Acceso directo" ─── */
+html body section.offer-v3 .ov3-microctas a:first-child::before {
+  content: "Acceso directo" !important;
+}
+
+/* ─── MENTORES · kicker fuera + grid 3 cols (sin Nacho) ─── */
+html body section.mentors-v2 .mv2-kicker {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+html body section.mentors-v2 .mv2-grid {
+  grid-template-columns: repeat(3, 1fr) !important;
+}
+@media (max-width: 1080px) {
+  html body section.mentors-v2 .mv2-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 600px) {
+  html body section.mentors-v2 .mv2-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* END · PATCH 51 dolor-v2 align + h2 wider + offer + mentors fixes */
