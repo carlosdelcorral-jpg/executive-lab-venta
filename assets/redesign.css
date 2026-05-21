@@ -13889,3 +13889,66 @@ html body section.closing-v2 .cv2-cta-secondary:hover {
 }
 
 /* END · PATCH 54 closing acceso directo */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PATCH 55 · Anchos expandidos + flechas SVG OFF agresivo
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Overview-v3 · subtitulo "Esto no es un curso de IA" → 2 lineas */
+html body section.overview-v3 .ov3-intro {
+  max-width: 880px !important;
+  font-size: clamp(17px, 1.4vw, 20px) !important;
+}
+
+/* Dolor-v2 · cards más anchas para que "El ruido y el coste" entre en menos lineas */
+html body section.dolor-v2 .dv2-wrap {
+  max-width: min(1400px, 94vw) !important;
+}
+html body section.dolor-v2 .dv2-grid {
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+}
+html body section.dolor-v2 .dv2-card {
+  padding: clamp(36px, 3.6vw, 52px) clamp(28px, 2.8vw, 40px) !important;
+}
+html body section.dolor-v2 .dv2-card p {
+  max-width: none !important;
+  font-size: clamp(15.5px, 1.15vw, 17px) !important;
+}
+
+/* IDE-V2 · "De nada sirve aprender la herramienta de moda..." en 2 lineas */
+html body section.ide-v2 .ide-foot {
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+}
+html body section.ide-v2 .ide-foot p {
+  max-width: 1000px !important;
+  font-size: clamp(17px, 1.4vw, 20px) !important;
+  line-height: 1.5 !important;
+}
+
+/* FLECHAS SVG · OCULTAR EN TODOS LOS BOTONES SOLICITAR (más agresivo) */
+html body a.hv2-cta svg,
+html body section.offer-v3 .ov3-cta svg,
+html body section.closing-v2 .cv2-cta svg,
+html body section.closing-v2 .cv2-cta-primary svg,
+html body a.el-cta-mobile svg,
+html body div[style*="FBF8F3"] a svg,
+html body div[style*="F2EBE0"] a svg,
+html body div[style*="background:#FBF8F3"] a svg,
+html body div[style*="background:#F2EBE0"] a svg,
+html body a[data-source="cta-intermedio"] svg,
+html body a[data-source="post-garantia"] svg,
+html body a[data-source="closing"] svg,
+html body a[data-source="closing-checkout"] svg,
+html body a[data-source="mobile-floating"] svg,
+html body a[data-source="hero"] svg,
+html body a[data-source="offer"] svg {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  visibility: hidden !important;
+}
+
+/* END · PATCH 55 expandido + flechas off final */
