@@ -14272,3 +14272,107 @@ html body a.el-cta-mobile > * {
 }
 
 /* END · PATCH 60 texto botones centrado */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PATCH 61 · NUCLEAR · centrar el botón completo dentro de su div padre
+   El problema NO es el texto dentro del pill, es el pill DENTRO del div.
+   Los divs CTA intermedios tienen text-align:center pero el <a> 
+   inline-flex no se centra por algún SVG hijo invisible que ocupa
+   espacio de inline-block en algunos navegadores.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Forzar contenedores CTA intermedios a centrar con FLEX (no text-align solo) */
+html body div[style*="FBF8F3"],
+html body div[style*="F2EBE0"],
+html body div[style*="background:#FBF8F3"],
+html body div[style*="background:#F2EBE0"],
+html body div[style*="background: #FBF8F3"],
+html body div[style*="background: #F2EBE0"] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-direction: column !important;
+}
+
+/* Y dentro, el <a> con margin auto + ancho ajustado */
+html body div[style*="FBF8F3"] > a,
+html body div[style*="F2EBE0"] > a,
+html body div[style*="background:#FBF8F3"] > a,
+html body div[style*="background:#F2EBE0"] > a,
+html body div[style*="background: #FBF8F3"] > a,
+html body div[style*="background: #F2EBE0"] > a {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 0 !important;
+  width: auto !important;
+  max-width: max-content !important;
+}
+
+/* El SVG fantasma · realmente fuera del flow */
+html body div[style*="FBF8F3"] > a svg,
+html body div[style*="F2EBE0"] > a svg,
+html body div[style*="background:#FBF8F3"] > a svg,
+html body div[style*="background:#F2EBE0"] > a svg,
+html body div[style*="background: #FBF8F3"] > a svg,
+html body div[style*="background: #F2EBE0"] > a svg {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  position: absolute !important;
+  visibility: hidden !important;
+  flex: 0 0 0 !important;
+}
+
+/* Hero CTA específico · centrado total */
+html body section.hv2-section .hv2-wrap {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+html body section.hv2-section .hv2-wrap > div {
+  display: flex !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+html body a.hv2-cta {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: inline-flex !important;
+  width: auto !important;
+  max-width: max-content !important;
+}
+
+/* Closing CTAs */
+html body section.closing-v2 .cv2-ctas {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 14px !important;
+}
+html body section.closing-v2 .cv2-cta {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 0 !important;
+}
+
+/* Offer CTA principal · centrado */
+html body section.offer-v3 .ov3-cta {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* END · PATCH 61 nuclear centrar botones */
