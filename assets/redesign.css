@@ -13134,3 +13134,222 @@ html body section.section-paper#resultados .vid-carousel .vid-slide {
 }
 
 /* END · PATCH 45 flechas encima fade + videos clickeables */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PATCH 46 · MODAL POPUP testimonios + flechas con fondo sólido naranja
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ════ FLECHAS · fondo naranja sólido (destacan SIEMPRE sobre cualquier fade) ════ */
+html body section.section-paper#resultados .vid-carousel .vid-btn,
+html body section.section-paper#resultados .vid-carousel .vid-prev,
+html body section.section-paper#resultados .vid-carousel .vid-next {
+  background: #EC4429 !important;
+  background-color: #EC4429 !important;
+  border: 2px solid #ffffff !important;
+  color: #ffffff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow:
+    0 16px 40px -8px rgba(0,0,0,0.5),
+    0 0 0 1px rgba(255,255,255,0.25) inset,
+    0 0 32px -4px rgba(236,68,41,0.6) !important;
+  z-index: 150 !important;
+}
+html body section.section-paper#resultados .vid-carousel .vid-btn:hover {
+  background: #c93521 !important;
+  background-color: #c93521 !important;
+  border-color: #ffffff !important;
+  box-shadow:
+    0 20px 48px -8px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(255,255,255,0.35) inset,
+    0 0 60px -4px rgba(236,68,41,0.8) !important;
+}
+html body section.section-paper#resultados .vid-carousel .vid-btn:active {
+  background: #b02e1a !important;
+}
+html body section.section-paper#resultados .vid-carousel .vid-btn svg {
+  stroke: #ffffff !important;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4)) !important;
+}
+
+/* Gradient laterales · pointer-events none ya pero asegurar z-index bajo */
+html body section.section-paper#resultados .vid-carousel::before,
+html body section.section-paper#resultados .vid-carousel::after {
+  z-index: 3 !important;
+  pointer-events: none !important;
+}
+
+/* Videos del marquee · cursor pointer pero NO play directo (lo intercepta el JS) */
+html body section.section-paper#resultados .vid-video video {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+/* Ocultar controles nativos en el marquee · se reproduce en modal */
+html body section.section-paper#resultados .vid-carousel .vid-slide .vid-video video {
+  pointer-events: none !important; /* el click lo capta el slide entero */
+}
+html body section.section-paper#resultados .vid-carousel .vid-slide {
+  cursor: pointer !important;
+}
+/* Indicador visual play sobre cada slide del marquee */
+html body section.section-paper#resultados .vid-carousel .vid-slide .vid-video {
+  position: relative !important;
+  cursor: pointer !important;
+}
+html body section.section-paper#resultados .vid-carousel .vid-slide .vid-video::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background:
+    radial-gradient(circle at center, rgba(0,0,0,0) 30%, rgba(0,0,0,0.25) 100%),
+    rgba(0,0,0,0.1) !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
+  transition: background .3s ease !important;
+}
+html body section.section-paper#resultados .vid-carousel .vid-slide:hover .vid-video::after {
+  background:
+    radial-gradient(circle at center, rgba(236,68,41,0.1) 30%, rgba(0,0,0,0.4) 100%),
+    rgba(0,0,0,0.2) !important;
+}
+/* Botón play overlay en cada video del marquee */
+html body section.section-paper#resultados .vid-carousel .vid-slide .vid-video::before {
+  content: "▶" !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 60px !important;
+  height: 60px !important;
+  background: #EC4429 !important;
+  color: #ffffff !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 24px !important;
+  line-height: 60px !important;
+  text-align: center !important;
+  z-index: 3 !important;
+  box-shadow:
+    0 8px 24px -4px rgba(0,0,0,0.5),
+    0 0 0 4px rgba(255,255,255,0.15),
+    0 0 40px -8px rgba(236,68,41,0.7) !important;
+  transition: transform .3s cubic-bezier(.2,.7,.2,1), background .3s ease !important;
+  pointer-events: none !important;
+  padding-left: 4px !important;
+  box-sizing: border-box !important;
+}
+html body section.section-paper#resultados .vid-carousel .vid-slide:hover .vid-video::before {
+  transform: translate(-50%, -50%) scale(1.12) !important;
+  background: #ff7a5e !important;
+}
+
+
+/* ════ MODAL VIDEO POPUP ════ */
+html body .el-vidmodal {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 99999 !important;
+  background: rgba(0, 0, 0, 0.92) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 24px !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: opacity .35s ease, visibility .35s ease !important;
+  pointer-events: none !important;
+}
+html body .el-vidmodal[aria-hidden="false"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+html body .el-vidmodal-inner {
+  position: relative !important;
+  max-width: min(560px, 92vw) !important;
+  max-height: 90vh !important;
+  width: auto !important;
+  aspect-ratio: 9 / 16 !important;
+  background: #000000 !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow:
+    0 32px 80px -16px rgba(0,0,0,0.7),
+    0 0 80px -16px rgba(236,68,41,0.3),
+    0 0 0 1px rgba(255,255,255,0.08) inset !important;
+  transform: scale(0.92) !important;
+  transition: transform .4s cubic-bezier(.2,.7,.2,1) !important;
+}
+html body .el-vidmodal[aria-hidden="false"] .el-vidmodal-inner {
+  transform: scale(1) !important;
+}
+
+html body .el-vidmodal-video {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  background: #000000 !important;
+  object-fit: contain !important;
+}
+
+html body .el-vidmodal-close {
+  position: absolute !important;
+  top: 20px !important;
+  right: 20px !important;
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 50% !important;
+  background: rgba(0, 0, 0, 0.7) !important;
+  border: 2px solid #ffffff !important;
+  color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  z-index: 100001 !important;
+  transition: background .25s ease, transform .25s ease, border-color .25s ease !important;
+  padding: 0 !important;
+  box-shadow:
+    0 8px 24px -4px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(255,255,255,0.1) inset !important;
+}
+html body .el-vidmodal-close:hover {
+  background: #EC4429 !important;
+  border-color: #EC4429 !important;
+  transform: scale(1.08) !important;
+}
+html body .el-vidmodal-close svg {
+  width: 22px !important;
+  height: 22px !important;
+  stroke: #ffffff !important;
+}
+
+/* Mobile · modal full width */
+@media (max-width: 720px) {
+  html body .el-vidmodal {
+    padding: 16px !important;
+  }
+  html body .el-vidmodal-inner {
+    max-width: 100vw !important;
+    border-radius: 8px !important;
+  }
+  html body .el-vidmodal-close {
+    width: 44px !important;
+    height: 44px !important;
+    top: 16px !important;
+    right: 16px !important;
+  }
+  html body section.section-paper#resultados .vid-carousel .vid-slide .vid-video::before {
+    width: 48px !important;
+    height: 48px !important;
+    font-size: 18px !important;
+  }
+}
+
+/* END · PATCH 46 modal popup + flechas naranja sólido + play overlays */
