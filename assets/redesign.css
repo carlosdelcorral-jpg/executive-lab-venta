@@ -13771,3 +13771,121 @@ html body section.mentors-v2 .mv2-grid {
 }
 
 /* END · PATCH 51 dolor-v2 align + h2 wider + offer + mentors fixes */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PATCH 52 · IDE titulos negro + Bitcoin sin naranja + ruido 2 lineas
+   + cards expandidas + flechas botones fuera + WA closing → acceso directo
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* IDE-V2 · titulos h3 en NEGRO (no naranja) */
+html body section.ide-v2 .ide-card h3 {
+  color: #0a0a0a !important;
+}
+
+/* Mentores · "Bitcoin con Rigor" sin naranja (em normal en cream) */
+html body section.mentors-v2 .mv2-card .mv2-credentials li em {
+  color: #0a0a0a !important;
+  font-style: italic !important;
+}
+
+/* Cards · expandir para que textos largos no rompan en 3 lineas
+   Aumentar ancho mínimo de las cards a 1fr stretch en grid ya estaba */
+html body section.ide-v2 .ide-grid {
+  max-width: 1320px !important;
+  margin: 0 auto !important;
+}
+html body section.ide-v2 .ide-card {
+  padding: clamp(36px, 3.4vw, 48px) clamp(28px, 2.8vw, 40px) clamp(40px, 4vw, 52px) !important;
+}
+html body section.ide-v2 .ide-card p {
+  max-width: none !important;
+}
+
+/* Encaje-v3 · cards ancho amplio y items sin saltos innecesarios */
+html body section.encaje-v3 .ev3-table {
+  max-width: 1320px !important;
+  margin: 0 auto !important;
+}
+html body section.encaje-v3 .ev3-col {
+  padding: clamp(32px, 3.4vw, 48px) clamp(28px, 2.8vw, 40px) !important;
+}
+html body section.encaje-v3 .ev3-list li {
+  max-width: none !important;
+  padding-right: 8px !important;
+}
+
+/* Wrap general más amplio para no romper en 3 líneas */
+html body section.ide-v2 .ide-wrap,
+html body section.encaje-v3 .ev3-wrap {
+  max-width: min(1320px, 94vw) !important;
+}
+
+/* END · PATCH 52 ide negro + bitcoin sin naranja + expandido */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PATCH 53 · Ocultar flechas SVG de TODOS los botones Solicitar
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Hero CTA · sin flecha */
+html body a.hv2-cta svg,
+html body .hv2-cta svg {
+  display: none !important;
+}
+
+/* CTA pricing card principal */
+html body section.offer-v3 .ov3-cta svg {
+  display: none !important;
+}
+
+/* CTA closing primary (Solicitar mi plaza al pie) */
+html body section.closing-v2 .cv2-cta-primary svg {
+  display: none !important;
+}
+
+/* CTAs intermedios (post-IDE, post-garantía, post-testimonios) */
+html body section.section-paper#resultados + div[style*="FBF8F3"] a svg,
+html body section.section-paper#resultados + div[style*="#FBF8F3"] a svg,
+html body div[style*="FBF8F3"] a[href="#precio"] svg,
+html body div[style*="F2EBE0"] a svg {
+  display: none !important;
+}
+
+/* CTA mobile flotante */
+html body a.el-cta-mobile svg {
+  display: none !important;
+}
+
+/* END · PATCH 53 flechas fuera */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PATCH 54 · Closing-v2 · botón "Acceso directo" (sustituye WhatsApp)
+   Estilo outline naranja, sin flecha
+   ═══════════════════════════════════════════════════════════════════════ */
+html body section.closing-v2 .cv2-cta-secondary,
+html body section.closing-v2 .cv2-cta.cv2-cta-secondary {
+  background: transparent !important;
+  color: #EC4429 !important;
+  border: 2px solid #EC4429 !important;
+  font-family: 'Lato', sans-serif !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  padding: 18px 32px !important;
+  border-radius: 999px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  transition: background .25s ease, color .25s ease, transform .25s ease !important;
+}
+html body section.closing-v2 .cv2-cta-secondary:hover {
+  background: #EC4429 !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+}
+
+/* END · PATCH 54 closing acceso directo */
