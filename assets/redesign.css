@@ -13630,3 +13630,129 @@ html body section.dolor-v2 h2 em {
 }
 
 /* END · PATCH 49 naranjas unificados en dolor-v2 */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PATCH 50 · Refinamientos copy + diseño
+   1) Mentors: kicker "Mentores" OFF · grid 3 cols (Nacho removed)
+   2) Offer compra → "Acceso directo"
+   3) Dolor-v2 cards alineadas + estructura visual mejorada
+   4) Sanchis sin resaltados extra
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ════ 1) MENTORS · sin kicker + grid 3 cols ════ */
+html body section.mentors-v2 .mv2-kicker {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  margin: 0 !important;
+}
+html body section.mentors-v2 .mv2-grid {
+  grid-template-columns: repeat(3, 1fr) !important;
+}
+@media (max-width: 1080px) {
+  html body section.mentors-v2 .mv2-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 600px) {
+  html body section.mentors-v2 .mv2-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ════ 2) OFFER · "Acceso directo" (sustituye "Compra directa") ════ */
+html body section.offer-v3 .ov3-microctas a:first-child::before {
+  content: "Acceso directo" !important;
+}
+
+/* ════ 3) DOLOR-V2 · alineación + estructura editorial mejorada ════ */
+/* Grid stretch para alturas iguales */
+html body section.dolor-v2 .dv2-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: clamp(20px, 2.2vw, 32px) !important;
+  align-items: stretch !important;
+  grid-auto-rows: 1fr !important;
+}
+
+/* Cards alturas iguales · padding consistente · flex column */
+html body section.dolor-v2 .dv2-card {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  padding: clamp(40px, 4vw, 56px) clamp(32px, 3.2vw, 42px) clamp(48px, 5vw, 64px) !important;
+  position: relative !important;
+}
+
+/* H3 título · más respiro arriba */
+html body section.dolor-v2 .dv2-card h3 {
+  margin-top: 0 !important;
+  margin-bottom: 28px !important;
+  padding-top: 0 !important;
+  font-size: clamp(28px, 3vw, 38px) !important;
+  line-height: 1.06 !important;
+  letter-spacing: -0.022em !important;
+  flex: 0 0 auto !important;
+}
+
+/* H3 ::before asterisco · más pequeño y mejor alineado al inicio del texto */
+html body section.dolor-v2 .dv2-card h3::before {
+  content: "✱ " !important;
+  display: inline !important;
+  font-size: 0.78em !important;
+  color: #EC4429 !important;
+  opacity: 0.7 !important;
+  font-style: italic !important;
+  vertical-align: baseline !important;
+  margin-right: 4px !important;
+}
+
+/* Body text · estructura más respirada */
+html body section.dolor-v2 .dv2-card p {
+  font-size: clamp(15.5px, 1.15vw, 17px) !important;
+  line-height: 1.65 !important;
+  letter-spacing: -0.002em !important;
+  margin: 0 !important;
+  color: rgba(251,248,243,0.86) !important;
+  flex: 1 1 auto !important;
+}
+/* Em destacados naranja Executive */
+html body section.dolor-v2 .dv2-card p em {
+  color: #EC4429 !important;
+  font-style: italic !important;
+  font-weight: 600 !important;
+}
+/* Strong neutro */
+html body section.dolor-v2 .dv2-card p strong {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+/* Mobile: 1 col */
+@media (max-width: 880px) {
+  html body section.dolor-v2 .dv2-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+}
+
+/* ════ 4) SANCHIS · asegurar sin <strong> extras (solo Bitcoin con Rigor en em) ════ */
+/* No hay strongs en su HTML actual, solo <em>Bitcoin con Rigor</em>
+   El CSS ya pone em en naranja. Coherente. No hay cambios. */
+
+/* ════ Unificación naranja GLOBAL en bloques principales ════ */
+/* Asegurar que TODOS los acentos clave usen #EC4429 (Executive primary)
+   y los hover usen #c93521 (red-deep) */
+html body section.weeks-roadmap .wr-card .wr-week-tag,
+html body section.weeks-roadmap .wr-kicker,
+html body section.overview-v3 .ov3-kicker,
+html body section.overview-v3 .ov3-phase-tag,
+html body section.ide-v2 .ide-card h3,
+html body section.ide-v2 .ide-kicker,
+html body section.offer-v3 .ov3-price-tag,
+html body section.offer-v3 .ov3-features h3 .duration {
+  color: #EC4429 !important;
+}
+
+/* END · PATCH 50 mentors + offer + dolor-v2 alineados + naranjas unificados */
