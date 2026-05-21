@@ -2091,7 +2091,10 @@ Aceptar todo
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
   </button>
   <div class="el-vidmodal-inner">
-    <video class="el-vidmodal-video" controls playsinline preload="auto"></video>
+    <video class="el-vidmodal-video" controls controlslist="nofullscreen nodownload noplaybackrate noremoteplayback" disablepictureinpicture disableremoteplayback playsinline webkit-playsinline preload="auto" x-webkit-airplay="deny"></video>
+    <div class="el-vidmodal-playicon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 21 12 6 21 6 3"/></svg>
+    </div>
   </div>
 </div>
 <script>
@@ -2101,22 +2104,62 @@ Aceptar todo
   if (!modal) return;
   const modalVideo = modal.querySelector('.el-vidmodal-video');
   const closeBtn = modal.querySelector('.el-vidmodal-close');
+  const playIcon = modal.querySelector('.el-vidmodal-playicon');
+
   function openModal(src) {
     modalVideo.src = src;
+    modalVideo.muted = false;
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-    setTimeout(() => { modalVideo.play().catch(()=>{}); }, 100);
+    setTimeout(() => {
+      modalVideo.play().then(() => {
+        modal.classList.remove('is-paused');
+      }).catch(() => {
+        /* Autoplay bloqueado → mostrar play overlay */
+        modal.classList.add('is-paused');
+      });
+    }, 100);
   }
   function closeModal() {
     modalVideo.pause();
     modalVideo.removeAttribute('src');
     modalVideo.load();
     modal.setAttribute('aria-hidden', 'true');
+    modal.classList.remove('is-paused');
     document.body.style.overflow = '';
   }
+
+  /* Click en el VÍDEO o en el play icon → toggle play/pause */
+  function togglePlay(e) {
+    e.preventDefault(); e.stopPropagation();
+    if (modalVideo.paused) {
+      modalVideo.play().then(() => modal.classList.remove('is-paused')).catch(() => {});
+    } else {
+      modalVideo.pause();
+      modal.classList.add('is-paused');
+    }
+  }
+  modalVideo.addEventListener('click', togglePlay);
+  playIcon.addEventListener('click', togglePlay);
+
+  /* Estado pause/play · feedback visual */
+  modalVideo.addEventListener('play', () => modal.classList.remove('is-paused'));
+  modalVideo.addEventListener('pause', () => modal.classList.add('is-paused'));
+  modalVideo.addEventListener('ended', () => modal.classList.add('is-paused'));
+
+  /* Bloquear fullscreen attempts vía teclado o doble click */
+  modalVideo.addEventListener('dblclick', e => { e.preventDefault(); e.stopPropagation(); });
+  modalVideo.addEventListener('webkitfullscreenchange', () => { if (document.webkitFullscreenElement === modalVideo) document.webkitExitFullscreen(); });
+  modalVideo.addEventListener('fullscreenchange', () => { if (document.fullscreenElement === modalVideo) document.exitFullscreen(); });
+
   closeBtn.addEventListener('click', closeModal);
   modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeModal(); });
+  document.addEventListener('keydown', e => {
+    if (modal.getAttribute('aria-hidden') === 'true') return;
+    if (e.key === 'Escape') closeModal();
+    if (e.key === ' ' || e.key === 'k') { e.preventDefault(); togglePlay(e); }
+    if (e.key === 'f' || e.key === 'F') { e.preventDefault(); /* bloqueado fullscreen */ }
+  });
   /* Interceptar clicks en videos del marquee */
   document.addEventListener('click', e => {
     const slide = e.target.closest('section#resultados .vid-slide');

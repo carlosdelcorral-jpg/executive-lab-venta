@@ -13353,3 +13353,90 @@ html body .el-vidmodal-close svg {
 }
 
 /* END · PATCH 46 modal popup + flechas naranja sólido + play overlays */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PATCH 47 · Modal · NO fullscreen + click-to-play + play icon overlay
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Bloqueo visual del botón fullscreen nativo (Chrome/Safari/Firefox) */
+html body .el-vidmodal-video::-webkit-media-controls-fullscreen-button {
+  display: none !important;
+  -webkit-appearance: none !important;
+}
+html body .el-vidmodal-video::-webkit-media-controls-overlay-enclosure {
+  display: none !important;
+}
+/* iOS · esconder badge fullscreen */
+html body .el-vidmodal-video {
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+/* Asegurar que el video del modal no entra en fullscreen */
+html body .el-vidmodal-video:fullscreen {
+  position: absolute !important;
+  inset: auto !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Video del modal · cursor pointer (toggle play/pause) */
+html body .el-vidmodal-video {
+  cursor: pointer !important;
+}
+
+/* Play icon overlay · grande y central · aparece solo cuando paused */
+html body .el-vidmodal-playicon {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) scale(1) !important;
+  width: 88px !important;
+  height: 88px !important;
+  background: rgba(236,68,41,0.95) !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 100 !important;
+  cursor: pointer !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity .25s ease, transform .25s ease, background .25s ease !important;
+  box-shadow:
+    0 12px 40px -6px rgba(0,0,0,0.5),
+    0 0 0 5px rgba(255,255,255,0.18),
+    0 0 60px -10px rgba(236,68,41,0.7) !important;
+}
+html body .el-vidmodal-playicon svg {
+  width: 36px !important;
+  height: 36px !important;
+  fill: #ffffff !important;
+  margin-left: 5px !important;
+}
+html body .el-vidmodal-playicon:hover {
+  background: #ff7a5e !important;
+  transform: translate(-50%, -50%) scale(1.08) !important;
+}
+
+/* Mostrar play icon SOLO cuando is-paused */
+html body .el-vidmodal.is-paused .el-vidmodal-playicon {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+/* Mobile · play icon más pequeño */
+@media (max-width: 720px) {
+  html body .el-vidmodal-playicon {
+    width: 72px !important;
+    height: 72px !important;
+  }
+  html body .el-vidmodal-playicon svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
+
+/* END · PATCH 47 modal sin fullscreen + click-to-play + play icon overlay */
