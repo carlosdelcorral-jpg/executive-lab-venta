@@ -14164,3 +14164,34 @@ html body section.offer-v3 .ov3-microctas a {
 }
 
 /* END · PATCH 58 botones centrados sin flecha */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PATCH 59 · Centrar botón "Solicitar acceso" del hero
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* El div que envuelve el .hv2-cta · centrado */
+html body section.hv2-section .hv2-wrap > div:has(> .hv2-cta) {
+  text-align: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin: 24px auto 0 !important;
+}
+
+/* Fallback para navegadores sin :has · todos los hijos div del hv2-wrap centrados */
+html body section.hv2-section .hv2-wrap {
+  text-align: center !important;
+}
+html body section.hv2-section .hv2-wrap > div {
+  text-align: center !important;
+}
+
+/* El propio CTA centrado */
+html body section.hv2-section a.hv2-cta {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* END · PATCH 59 hero cta centrado */
