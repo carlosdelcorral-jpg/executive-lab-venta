@@ -12982,3 +12982,98 @@ html body section.section-paper#resultados .vid-video:has(video) .vid-placeholde
 }
 
 /* END · PATCH 43 fotos profes + videos testimonios */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PATCH 44 · Testimonios · flechas BIEN VISIBLES + sin auto-scroll
+   El marquee ya NO se mueve solo (controlado en JS).
+   Solo necesitamos que las flechas se vean y se usen claramente.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Flechas · MÁS GRANDES, MÁS BLANCAS, MÁS VISIBLES */
+html body section.section-paper#resultados .vid-carousel .vid-btn,
+html body section.section-paper#resultados .vid-carousel .vid-prev,
+html body section.section-paper#resultados .vid-carousel .vid-next {
+  width: 64px !important;
+  height: 64px !important;
+  border: 2px solid #ffffff !important;
+  background: rgba(255,255,255,0.10) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  color: #ffffff !important;
+  box-shadow:
+    0 12px 32px -8px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(255,255,255,0.15) inset,
+    0 0 40px -10px rgba(255,255,255,0.2) !important;
+  cursor: pointer !important;
+  transition: background .25s ease, border-color .25s ease, transform .25s ease, box-shadow .25s ease !important;
+  z-index: 25 !important;
+}
+
+/* Iconos · más grandes y bien blancos */
+html body section.section-paper#resultados .vid-carousel .vid-btn svg {
+  width: 24px !important;
+  height: 24px !important;
+  stroke: #ffffff !important;
+  stroke-width: 2.4 !important;
+  fill: none !important;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4)) !important;
+}
+
+/* Hover · naranja Executive */
+html body section.section-paper#resultados .vid-carousel .vid-btn:hover {
+  background: #EC4429 !important;
+  border-color: #EC4429 !important;
+  color: #ffffff !important;
+  box-shadow:
+    0 16px 40px -8px rgba(236,68,41,0.55),
+    0 0 0 1px rgba(255,255,255,0.2) inset,
+    0 0 60px -10px rgba(236,68,41,0.5) !important;
+}
+html body section.section-paper#resultados .vid-carousel .vid-prev:hover {
+  transform: translateY(-50%) scale(1.08) translateX(-2px) !important;
+}
+html body section.section-paper#resultados .vid-carousel .vid-next:hover {
+  transform: translateY(-50%) scale(1.08) translateX(2px) !important;
+}
+
+/* Active (click) · feedback claro */
+html body section.section-paper#resultados .vid-carousel .vid-btn:active {
+  background: #c93521 !important;
+  transform: translateY(-50%) scale(0.96) !important;
+}
+
+/* Posición · más separadas para no tapar contenido */
+html body section.section-paper#resultados .vid-carousel .vid-prev {
+  left: clamp(8px, 2vw, 24px) !important;
+}
+html body section.section-paper#resultados .vid-carousel .vid-next {
+  right: clamp(8px, 2vw, 24px) !important;
+}
+
+/* Mobile · ajustar tamaño */
+@media (max-width: 720px) {
+  html body section.section-paper#resultados .vid-carousel .vid-btn,
+  html body section.section-paper#resultados .vid-carousel .vid-prev,
+  html body section.section-paper#resultados .vid-carousel .vid-next {
+    width: 48px !important;
+    height: 48px !important;
+    border-width: 1.5px !important;
+  }
+  html body section.section-paper#resultados .vid-carousel .vid-btn svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+}
+
+/* Ajustar también el padding del carousel para hueco de flechas */
+html body section.section-paper#resultados .vid-carousel {
+  padding: 0 80px !important;
+}
+@media (max-width: 720px) {
+  html body section.section-paper#resultados .vid-carousel {
+    padding: 0 64px !important;
+  }
+}
+
+/* END · PATCH 44 flechas testimonios visibles + sin auto-scroll */

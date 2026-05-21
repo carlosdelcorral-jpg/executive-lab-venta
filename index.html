@@ -2125,26 +2125,25 @@ Aceptar todo
     if (prev) carousel.appendChild(prev);
     if (next) carousel.appendChild(next);
     if (controls) controls.remove();
-    // Marquee con rAF
-    let scrollPos = 0;
-    const speed = 0.5; // px per frame
-    let manualOffset = 0;
-    let manualTarget = 0;
-    function step() {
-      scrollPos += speed;
-      // Aplicar offset manual con easing
-      if (manualOffset !== manualTarget) {
-        manualOffset += (manualTarget - manualOffset) * 0.12;
-        if (Math.abs(manualTarget - manualOffset) < 0.5) manualOffset = manualTarget;
+    // Carousel estatico · solo se mueve con flechas (NO auto-scroll)
+    let currentOffset = 0;
+    let targetOffset = 0;
+    function applyTransform() {
+      // Easing suave hacia targetOffset
+      const diff = targetOffset - currentOffset;
+      if (Math.abs(diff) > 0.5) {
+        currentOffset += diff * 0.18;
+      } else {
+        currentOffset = targetOffset;
       }
-      let total = track.scrollWidth / 3; // un tercio porque clonamos x3
-      let pos = (scrollPos + manualOffset) % total;
+      // Loop infinito (modulo del tercio porque clonamos x3)
+      const total = track.scrollWidth / 3;
+      let pos = currentOffset % total;
       if (pos < 0) pos += total;
-      // setProperty con priority important para vencer cualquier !important del CSS
       track.style.setProperty('transform', 'translateX(' + (-pos) + 'px)', 'important');
-      requestAnimationFrame(step);
+      requestAnimationFrame(applyTransform);
     }
-    requestAnimationFrame(step);
+    requestAnimationFrame(applyTransform);
     // Calcular ancho de una card (incluido gap)
     function cardStep() {
       const first = track.querySelector('.vid-slide');
@@ -2153,8 +2152,8 @@ Aceptar todo
       const gap = parseFloat(style.columnGap || style.gap || '24') || 24;
       return first.getBoundingClientRect().width + gap;
     }
-    if (prev) prev.addEventListener('click', () => { manualTarget -= cardStep(); });
-    if (next) next.addEventListener('click', () => { manualTarget += cardStep(); });
+    if (prev) prev.addEventListener('click', () => { targetOffset -= cardStep(); });
+    if (next) next.addEventListener('click', () => { targetOffset += cardStep(); });
   }, 50);
 })();
 </script>
