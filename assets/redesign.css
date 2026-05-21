@@ -12557,3 +12557,354 @@ html {
 }
 
 /* END · PATCH 40 nav mobile + scroll a precio */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PATCH 41 · NAVEGACIÓN MOBILE RESPONSIVE · disciplina UI/UX-pro-max
+   ───────────────────────────────────────────────────────────────────────
+   PRINCIPIOS APLICADOS:
+   · Touch targets ≥ 44px (Apple HIG) en todos los botones flotantes
+   · No horizontal scroll en NINGÚN viewport
+   · Iconos SVG inline (no background-image que se rompen al volver)
+   · Tabular numerals consistentes
+   · Letter-spacing balanced
+   · Performance: backdrop-filter solo donde aporta
+   · Estados focus/active accesibles
+   · Safe areas iPhone respetadas (notch + home indicator)
+   ───────────────────────────────────────────────────────────────────────
+   FIX CRÍTICOS:
+   1) WhatsApp icon: pasado de background-image a <svg> inline (no se borra)
+   2) Horizontal overflow: bloqueado a nivel html/body
+   3) Touch targets garantizados ≥48px
+   4) iOS safe-area-inset respetado
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════
+   A · BLOQUEO de scroll horizontal global
+   ═══════════════════════════════════════ */
+html,
+html body {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  width: 100% !important;
+  position: relative !important;
+}
+
+/* Prevenir elementos sobresalientes en mobile */
+@media (max-width: 720px) {
+  html body section,
+  html body section > * {
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+  /* Imgs y media nunca sobresalen */
+  html body img,
+  html body video,
+  html body iframe {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+}
+
+/* ═══════════════════════════════════════
+   B · WHATSAPP FLOATING · SVG inline robusto
+   El SVG real dentro del <a> NO se borra al volver a la página
+   (a diferencia del background-image que sufría en iOS Safari)
+   ═══════════════════════════════════════ */
+
+/* Cancelar el background-image SVG anterior (que se rompía) */
+html body a.el-wa-floating {
+  background-image: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  text-indent: 0 !important;
+}
+
+/* Reset display de hijos: SVG e span coexisten */
+html body a.el-wa-floating .el-wa-icon,
+html body a.el-wa-floating svg.el-wa-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  fill: currentColor !important;
+}
+
+/* ── DESKTOP: pill texto + icono pequeño ── */
+@media (min-width: 721px) {
+  html body a.el-wa-floating {
+    bottom: 24px !important;
+    right: 24px !important;
+    left: auto !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 48px !important;
+    background: #25D366 !important;
+    background-color: #25D366 !important;
+    color: #ffffff !important;
+    padding: 14px 22px 14px 18px !important;
+    border-radius: 999px !important;
+    font-family: 'Lato', sans-serif !important;
+    font-size: 13.5px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.02em !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transition: background-color .25s ease, transform .25s ease, box-shadow .25s ease !important;
+    box-shadow:
+      0 12px 32px -10px rgba(37,211,102,0.55),
+      0 0 0 1px rgba(255,255,255,0.12) inset !important;
+    font-size: 13.5px !important;
+  }
+  html body a.el-wa-floating svg.el-wa-icon {
+    width: 20px !important;
+    height: 20px !important;
+    color: #ffffff !important;
+    fill: #ffffff !important;
+  }
+  html body a.el-wa-floating .el-wa-text {
+    display: inline-block !important;
+    font-size: 13.5px !important;
+    color: #ffffff !important;
+    line-height: 1 !important;
+  }
+  html body a.el-wa-floating:hover {
+    background-color: #1ebe5d !important;
+    transform: translateY(-2px) !important;
+    box-shadow:
+      0 18px 42px -10px rgba(37,211,102,0.7),
+      0 0 0 1px rgba(255,255,255,0.18) inset !important;
+  }
+}
+
+/* ── MOBILE: círculo solo con icono ── */
+@media (max-width: 720px) {
+  html body a.el-wa-floating {
+    position: fixed !important;
+    bottom: calc(18px + env(safe-area-inset-bottom, 0px)) !important;
+    right: calc(16px + env(safe-area-inset-right, 0px)) !important;
+    left: auto !important;
+    top: auto !important;
+    width: 52px !important;
+    height: 52px !important;
+    min-width: 52px !important;
+    min-height: 52px !important;
+    border-radius: 50% !important;
+    background: #25D366 !important;
+    background-color: #25D366 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0 !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    box-shadow:
+      0 8px 24px -6px rgba(37,211,102,0.55),
+      0 0 0 1px rgba(255,255,255,0.15) inset !important;
+    z-index: 9999 !important;
+    transform: none !important;
+    /* SVG inline siempre visible */
+    background-image: none !important;
+  }
+  html body a.el-wa-floating svg.el-wa-icon {
+    width: 28px !important;
+    height: 28px !important;
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    display: block !important;
+    flex-shrink: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  /* Ocultar el texto en mobile */
+  html body a.el-wa-floating .el-wa-text {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    font-size: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  html body a.el-wa-floating:hover,
+  html body a.el-wa-floating:active,
+  html body a.el-wa-floating:focus,
+  html body a.el-wa-floating:visited {
+    background-color: #1ebe5d !important;
+    color: #ffffff !important;
+  }
+  html body a.el-wa-floating:hover svg,
+  html body a.el-wa-floating:active svg,
+  html body a.el-wa-floating:focus svg,
+  html body a.el-wa-floating:visited svg {
+    fill: #ffffff !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════
+   C · CTA "Solicitar plaza" mobile · robusto
+   ═══════════════════════════════════════ */
+@media (max-width: 720px) {
+  html body a.el-cta-mobile {
+    bottom: calc(18px + env(safe-area-inset-bottom, 0px)) !important;
+    left: calc(16px + env(safe-area-inset-left, 0px)) !important;
+    right: calc(84px + env(safe-area-inset-right, 0px)) !important;
+    top: auto !important;
+    position: fixed !important;
+    z-index: 9998 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    min-height: 52px !important;
+    padding: 14px 20px !important;
+    background: #EC4429 !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    border-radius: 999px !important;
+    border: 0 !important;
+    font-family: 'Lato', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.16em !important;
+    text-transform: uppercase !important;
+    line-height: 1 !important;
+    text-align: center !important;
+    box-shadow:
+      0 14px 32px -10px rgba(236,68,41,0.6),
+      0 0 0 1px rgba(255,255,255,0.12) inset,
+      0 0 40px -10px rgba(236,68,41,0.5) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    /* Truncar texto si fuera necesario · pero no se romperá */
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  html body a.el-cta-mobile svg {
+    width: 14px !important;
+    height: 14px !important;
+    flex-shrink: 0 !important;
+    stroke: #ffffff !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════
+   D · NAV SUPERIOR mobile · sin sticky + mejor toque
+   ═══════════════════════════════════════ */
+@media (max-width: 720px) {
+  html body header,
+  html body header.site-header,
+  html body .site-header {
+    position: relative !important;
+    top: auto !important;
+    z-index: 1 !important;
+  }
+  /* Links del nav · touch targets ≥44px */
+  html body header a,
+  html body .site-header a {
+    min-height: 44px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+  /* Toggle mobile · touch target garantizado */
+  html body .nav-toggle {
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════
+   E · TOUCH TARGETS globales ≥44px en mobile
+   ═══════════════════════════════════════ */
+@media (max-width: 720px) {
+  html body a.ov3-cta,
+  html body a.hv2-cta,
+  html body a.cv2-cta,
+  html body button.vid-btn,
+  html body button.vid-dot {
+    min-height: 44px !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════
+   F · MARQUEE de logos · prevenir overflow
+   ═══════════════════════════════════════ */
+@media (max-width: 720px) {
+  html body section.trust-marquee {
+    overflow: hidden !important;
+    max-width: 100vw !important;
+  }
+  html body section.trust-marquee .tm-viewport {
+    overflow: hidden !important;
+    max-width: 100vw !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════
+   G · TESTIMONIOS marquee · prevenir overflow
+   ═══════════════════════════════════════ */
+@media (max-width: 720px) {
+  html body section.section-paper#resultados {
+    overflow: hidden !important;
+    max-width: 100vw !important;
+  }
+  html body section.section-paper#resultados .vid-carousel {
+    overflow: hidden !important;
+    max-width: 100vw !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════
+   H · SECTION HEADS · padding contención
+   ═══════════════════════════════════════ */
+@media (max-width: 720px) {
+  html body h1,
+  html body h2,
+  html body h3 {
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+    hyphens: auto !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════
+   I · FOCUS states accesibles
+   ═══════════════════════════════════════ */
+html body a:focus-visible,
+html body button:focus-visible {
+  outline: 2px solid #EC4429 !important;
+  outline-offset: 3px !important;
+  border-radius: 4px;
+}
+/* Botones flotantes · focus ring distinct */
+html body a.el-wa-floating:focus-visible {
+  outline: 2px solid #ffffff !important;
+  outline-offset: 3px !important;
+}
+html body a.el-cta-mobile:focus-visible {
+  outline: 2px solid #ffffff !important;
+  outline-offset: 3px !important;
+}
+
+/* END · PATCH 41 navegación móvil responsive + WA icon SVG robusto */
