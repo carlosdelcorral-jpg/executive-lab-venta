@@ -12935,3 +12935,50 @@ html body .el-wa-floating::after {
 }
 
 /* END · PATCH 42 fix WA icon duplicado desktop */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PATCH 43 · Fotos reales de mentores + videos testimonios
+   · .mv2-photo · img object-fit cover
+   · Sobre la foto, asterisco placeholder OFF cuando hay <img>
+   · .vid-video · video tag con object-fit cover
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Fotos de mentores · cuando .mv2-photo contiene <img>, ocupa todo el frame */
+html body section.mentors-v2 .mv2-photo img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+  display: block !important;
+  border: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Cuando hay <img>, ocultar el asterisco placeholder y el texto [foto] */
+html body section.mentors-v2 .mv2-photo:has(img)::before,
+html body section.mentors-v2 .mv2-photo:has(img)::after {
+  display: none !important;
+  content: none !important;
+}
+html body section.mentors-v2 .mv2-photo:has(img) {
+  font-size: 0 !important; /* oculta texto residual */
+}
+
+/* Videos de testimonios · object-fit cover dentro del .vid-video */
+html body section.section-paper#resultados .vid-video video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+  background: #050505 !important;
+  border-radius: 4px !important;
+}
+
+/* Cuando hay <video>, ocultar placeholder */
+html body section.section-paper#resultados .vid-video:has(video) .vid-placeholder {
+  display: none !important;
+}
+
+/* END · PATCH 43 fotos profes + videos testimonios */
