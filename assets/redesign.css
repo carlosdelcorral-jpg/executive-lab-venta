@@ -13952,3 +13952,105 @@ html body a[data-source="offer"] svg {
 }
 
 /* END · PATCH 55 expandido + flechas off final */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PATCH 56 · NUCLEAR · naranja unificado + flechas off + testimonio tag off
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ─── NARANJA ÚNICO #EC4429 EN TODA LA WEB ─── */
+/* Cualquier color naranja del sistema vieja → ec4429 */
+html body [style*="color:#EC4429"],
+html body [style*="color: #EC4429"],
+html body [style*="color:#ec4429"],
+html body [style*="color: #ec4429"] {
+  color: #EC4429 !important;
+}
+
+/* Variables CSS naranja · forzar a #EC4429 */
+:root,
+html,
+html body {
+  --red: #EC4429 !important;
+  --red-soft: #EC4429 !important;
+  --red-deep: #EC4429 !important;
+  --accent: #EC4429 !important;
+  --primary: #EC4429 !important;
+  --primary-orange: #EC4429 !important;
+  --executive-red: #EC4429 !important;
+  --orange: #EC4429 !important;
+}
+
+/* Em y strong con colores naranja en TODOS los contextos */
+html body em,
+html body strong em,
+html body .accent {
+  /* No forzar TODO em a naranja porque algunos son intencionados negros */
+}
+
+/* TODO em DENTRO de secciones key → naranja unificado */
+html body section.dolor-v2 em,
+html body section.overview-v3 em,
+html body section.weeks-roadmap em,
+html body section.ide-v2 em,
+html body section.mentors-v2 .mv2-head em,
+html body section.section-paper#resultados em,
+html body section.offer-v3 em,
+html body section.guarantee-v2 em,
+html body section.encaje-v3 em,
+html body section.faq-v2 em,
+html body section.closing-v2 em {
+  color: #EC4429 !important;
+  -webkit-text-fill-color: #EC4429 !important;
+}
+
+/* Excepción · Bitcoin con Rigor en mentores · NEGRO */
+html body section.mentors-v2 .mv2-card .mv2-credentials li em {
+  color: #0a0a0a !important;
+  -webkit-text-fill-color: #0a0a0a !important;
+}
+
+/* Encaje NO column · em gris (no naranja) */
+html body section.encaje-v3 .ev3-col-no em {
+  color: #5a5a5a !important;
+  -webkit-text-fill-color: #5a5a5a !important;
+}
+
+/* ─── FLECHAS SVG · OFF NUCLEAR ─── */
+/* Cualquier SVG dentro de cualquier link Solicitar/Acceso/CTA */
+html body a[href*="precio"] svg,
+html body a[href*="calendar.executivelab"] svg,
+html body a[href*="checkout"] svg,
+html body a[data-track="booking"] svg,
+html body .hv2-cta svg,
+html body .ov3-cta svg,
+html body .cv2-cta svg,
+html body .cv2-cta-primary svg,
+html body .cv2-cta-secondary svg,
+html body .el-cta-mobile svg,
+html body section.offer-v3 .ov3-microctas a svg,
+html body section.section-paper#resultados + div a svg,
+html body section.guarantee-v2 + div a svg,
+html body div[style*="FBF8F3"] a svg,
+html body div[style*="F2EBE0"] a svg,
+html body div[style*="background:#FBF8F3"] a svg,
+html body div[style*="background:#F2EBE0"] a svg,
+html body div[style*="background: #FBF8F3"] a svg,
+html body div[style*="background: #F2EBE0"] a svg {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+}
+
+/* ─── TESTIMONIOS · ocultar tag "Testimonio · 01/02/03/04" ─── */
+html body section.section-paper#resultados .vid-tag {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* END · PATCH 56 nuclear naranjas + flechas off + testimonio tag off */
