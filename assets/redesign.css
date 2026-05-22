@@ -14376,3 +14376,35 @@ html body section.offer-v3 .ov3-cta {
 }
 
 /* END · PATCH 61 nuclear centrar botones */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PATCH 62 · Posters de testimonios visibles en mobile
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Video tag con poster · imagen siempre visible hasta que se reproduce */
+html body section.section-paper#resultados .vid-video video,
+html body section.section-paper#resultados .vid-mp4 {
+  object-fit: cover !important;
+  object-position: center center !important;
+  background: #050505 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* iOS Safari · forzar a que muestre el poster antes del primer play */
+@media (max-width: 720px) {
+  html body section.section-paper#resultados .vid-video video {
+    -webkit-tap-highlight-color: transparent !important;
+    background: #050505 !important;
+  }
+  /* Aspect ratio garantizado en mobile · evita que se vea cortado */
+  html body section.section-paper#resultados .vid-carousel .vid-slide .vid-video {
+    aspect-ratio: 9 / 16 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+}
+
+/* END · PATCH 62 thumbnails testimonios mobile */
