@@ -14408,3 +14408,47 @@ html body section.section-paper#resultados .vid-mp4 {
 }
 
 /* END · PATCH 62 thumbnails testimonios mobile */
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PATCH 63 · Fix thumbnails testimonios mobile · contain en vez de cover
+   Los videos son 9:16 verticales, no queremos zoom/crop forzado
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Video tag · CONTAIN (no cortar) · fondo dark integrado */
+html body section.section-paper#resultados .vid-video video,
+html body section.section-paper#resultados .vid-mp4,
+html body section.section-paper#resultados .vid-carousel .vid-slide video {
+  object-fit: contain !important;
+  object-position: center center !important;
+  background: #050505 !important;
+}
+
+/* Contenedor video · aspect ratio 9:16 forzado en todos los breakpoints */
+html body section.section-paper#resultados .vid-carousel .vid-slide .vid-video,
+html body section.section-paper#resultados .vid-slide .vid-video {
+  aspect-ratio: 9 / 16 !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: 70vh !important;
+  overflow: hidden !important;
+  background: #050505 !important;
+  border-radius: 4px !important;
+  position: relative !important;
+}
+
+/* Mobile · max-height más conservador para que entre todo en viewport */
+@media (max-width: 720px) {
+  html body section.section-paper#resultados .vid-carousel .vid-slide .vid-video {
+    max-height: 65vh !important;
+    width: 100% !important;
+  }
+  html body section.section-paper#resultados .vid-video video {
+    object-fit: contain !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+/* END · PATCH 63 video thumbnails contain mobile fix */
